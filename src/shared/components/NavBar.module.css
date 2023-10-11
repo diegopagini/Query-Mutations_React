@@ -1,12 +1,11 @@
-
-
+/** @format */
 
 .active {
-  @apply text-blue-500;
-  transition: all .2s;
+	@apply text-blue-500;
+	transition: all 0.2s;
 }
 
 .inactive {
-  @apply text-gray-100;
-  transition: all .2s;
+	@apply text-gray-100;
+	transition: all 0.2s;
 }
