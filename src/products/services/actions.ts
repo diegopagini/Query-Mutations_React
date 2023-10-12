@@ -1,5 +1,5 @@
 /** @format */
-import { Product, productsApi } from '..';
+import { Product, ProductLike, productsApi } from '..';
 
 interface GetProductsOptions {
 	filterKey?: string;
@@ -22,5 +22,11 @@ export const getProducts = async ({ filterKey }: GetProductsOptions): Promise<Pr
 
 export const getProductById = async (id: number): Promise<Product> => {
 	const { data } = await productsApi.get<Product>(`/products/${id}`);
+	return data;
+};
+
+export const createProduct = async (product: ProductLike): Promise<Product> => {
+	await sleep(2);
+	const { data } = await productsApi.post<Product>('/products', product);
 	return data;
 };

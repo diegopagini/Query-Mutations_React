@@ -1,6 +1,9 @@
 /** @format */
 import { Button, Image, Input, Textarea } from '@nextui-org/react';
+import { useMutation } from '@tanstack/react-query';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+
+import { productActions, ProductLike } from '..';
 
 interface FormInputs {
 	category: string;
@@ -11,6 +14,10 @@ interface FormInputs {
 }
 
 export const NewProduct = () => {
+	const productMutation = useMutation({
+		mutationFn: productActions.createProduct,
+	});
+
 	const { control, handleSubmit, watch } = useForm<FormInputs>({
 		defaultValues: {
 			category: 'electronics',
@@ -30,7 +37,7 @@ export const NewProduct = () => {
 	// }, [newImage]);
 
 	const onSubmit: SubmitHandler<FormInputs> = (data: FormInputs) => {
-		console.log(data);
+		productMutation.mutate(data as ProductLike);
 	};
 
 	return (
@@ -125,8 +132,9 @@ export const NewProduct = () => {
 							className='mt-2'
 							color='primary'
 							type='submit'
+							isDisabled={productMutation.isLoading}
 						>
-							Crear
+							{productMutation.isLoading ? 'Cargando...' : 'Crear'}
 						</Button>
 					</div>
 

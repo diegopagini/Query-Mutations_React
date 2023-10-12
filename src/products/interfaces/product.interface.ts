@@ -16,3 +16,12 @@ export interface Rating {
 	rate: number;
 	count: number;
 }
+
+export interface ProductLike {
+	category: Category;
+	description: string;
+	id?: number;
+	image: string;
+	price: number;
+	title: string;
+}
