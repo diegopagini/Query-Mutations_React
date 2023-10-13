@@ -1,9 +1,8 @@
 /** @format */
 import { Button, Image, Input, Textarea } from '@nextui-org/react';
-import { useMutation } from '@tanstack/react-query';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
-import { productActions, ProductLike } from '..';
+import { ProductLike, useProductMutation } from '..';
 
 interface FormInputs {
 	category: string;
@@ -14,9 +13,7 @@ interface FormInputs {
 }
 
 export const NewProduct = () => {
-	const productMutation = useMutation({
-		mutationFn: productActions.createProduct,
-	});
+	const productMutation = useProductMutation();
 
 	const { control, handleSubmit, watch } = useForm<FormInputs>({
 		defaultValues: {
